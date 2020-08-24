@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/victor-pena/victor-pena.html">
+
+<dom-module id="workshop-app">
+    <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+
+    <div class="container">
+      <victor-pena id="elemento1" title="Valor de propiedad inLine" input-value="Input value inLine" button-value="button value inLine"></victor-pena>
+      <victor-pena id="elemento2" title="[[title2]]" input-value="{{input2}}" button-value="[[input2]]"></victor-pena>
+      <victor-pena id="elemento3" title="{{workshopValue}}" input-value="{{workshopValue}}" button-value="{{workshopValue}}"></victor-pena>
+    </div>
+
+  </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class WorkshopApp extends Polymer.Element {
+            static get is() {
+                return 'workshop-app';
+            }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'Victor Peña'
+                    },
+                    title2: {
+                        type: String,
+                        value: 'Esto es una Propiedad dentro de otra'
+                    },
+                    input2: {
+                        type: String,
+                        value: 'Esto es una Propiedad'
+                    },
+                    workshopValue: {
+                        type: String,
+                        value: 'workshop'
+                    }
+
+                };
+            }
+        }
+
+        window.customElements.define(WorkshopApp.is, WorkshopApp);
+    </script>
+</dom-module>

@@ -1,0 +1,7 @@
+{
+  "name": "workshop",
+  "short_name": "workshop",
+  "description": "mi primer app en polymer",
+  "start_url": "/",
+  "display": "standalone"
+}
