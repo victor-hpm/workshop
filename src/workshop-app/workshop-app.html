@@ -16,15 +16,7 @@
           text-align: center;
       }
 
-      victor-pena {
-          --victor-pena: {
-            background-color: #c0c0c0;
-            color: #fff;
-            margin: 10px;
-            padding: 20px;
-          }
-      }
-
+    
       victor-pena:nth-child(1){
           --victor-pena-paper-card: {
               background-color: #000; 
@@ -51,16 +43,29 @@
       }
       victor-pena:nth-child(3){
           --victor-pena-paper-card: {
-              background-color: #00ffff; 
+              background: #00ffff; 
           }
           --victor-pena-paper-input: {
             background-color: #fff; 
           }
           --victor-pena-paper-button: {
-            background-color: 	#8b0000;
-            color: #000;
+            --paper-button:{
+                background: #8b0000;
+                color: #000;
+            }
+
+          } 
+    }
+
+    victor-pena {
+          --victor-pena: {
+            background-color: #c0c0c0;
+            color: #fff;
+            margin: 10px;
+            padding: 20px;
           }
       }
+
 
 
     </style>
