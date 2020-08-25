@@ -6,7 +6,63 @@
     <style>
       :host {
         display: block;
+        padding: 5px;
+        font-family: 'Courier New', Courier, monospace;
       }
+
+      .container {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+      }
+
+      victor-pena {
+          --victor-pena: {
+            background-color: #c0c0c0;
+            color: #fff;
+            margin: 10px;
+            padding: 20px;
+          }
+      }
+
+      victor-pena:nth-child(1){
+          --victor-pena-paper-card: {
+              background-color: #000; 
+          }
+          --victor-pena-paper-input: {
+            background-color: #fff; 
+            border-radius: 10px;
+          }
+          --victor-pena-paper-button: {
+            background-color: red;
+          }
+      }
+      victor-pena:nth-child(2){
+          --victor-pena-paper-card: {
+              background-color: #008000; 
+              border-radius: 50px;
+          }
+          --victor-pena-paper-input: {
+            background-color: #fff; 
+          }
+          --victor-pena-paper-button: {
+            background-color: #008080;
+          }
+      }
+      victor-pena:nth-child(3){
+          --victor-pena-paper-card: {
+              background-color: #00ffff; 
+          }
+          --victor-pena-paper-input: {
+            background-color: #fff; 
+          }
+          --victor-pena-paper-button: {
+            background-color: 	#8b0000;
+            color: #000;
+          }
+      }
+
+
     </style>
     <h2>Hello [[prop1]]!</h2>
 
