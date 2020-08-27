@@ -1,83 +1,90 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/victor-pena/victor-pena.html">
+<link rel="import" href="../../bower_components/login-workshop/login-workshop.html">
 
 <dom-module id="workshop-app">
-    <template>
+
+
+
+    <template show-login="[[authenticated]]">
     <style>
-      :host {
-        display: block;
-        padding: 5px;
-        font-family: 'Courier New', Courier, monospace;
-      }
-
-      .container {
-          display: flex;
-          justify-content: center;
-          text-align: center;
-      }
-
-    
-      victor-pena:nth-child(1){
-          --victor-pena-paper-card: {
-              background-color: #000; 
-          }
-          --victor-pena-paper-input: {
-            background-color: #fff; 
-            border-radius: 10px;
-          }
-          --victor-pena-paper-button: {
-            background-color: red;
-          }
-      }
-      victor-pena:nth-child(2){
-          --victor-pena-paper-card: {
-              background-color: #008000; 
-              border-radius: 50px;
-          }
-          --victor-pena-paper-input: {
-            background-color: #fff; 
-          }
-          --victor-pena-paper-button: {
-            background-color: #008080;
-          }
-      }
-      victor-pena:nth-child(3){
-          --victor-pena-paper-card: {
-              background: #00ffff; 
-          }
-          --victor-pena-paper-input: {
-            background-color: #fff; 
-          }
-          --victor-pena-paper-button: {
-            --paper-button:{
-                background: #8b0000;
-                color: #000;
+         :host {
+            display: block;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+     
+        .container {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        victor-pena:nth-child(1) {
+            --victor-pena-paper-card: {
+                background-color: #000;
             }
-
-          } 
-    }
-
-    victor-pena {
-          --victor-pena: {
-            background-color: #c0c0c0;
-            color: #fff;
-            margin: 10px;
-            padding: 20px;
-          }
-      }
-
-
-
+            --victor-pena-paper-input: {
+                background-color: #fff;
+                border-radius: 10px;
+            }
+            --victor-pena-paper-button: {
+                background-color: red;
+            }
+        }
+        
+        victor-pena:nth-child(2) {
+            --victor-pena-paper-card: {
+                background-color: #008000;
+                border-radius: 50px;
+            }
+            --victor-pena-paper-input: {
+                background-color: #fff;
+            }
+            --victor-pena-paper-button: {
+                background-color: #008080;
+            }
+        }
+        
+        victor-pena:nth-child(3) {
+            --victor-pena-paper-card: {
+                background: #00ffff;
+            }
+            --victor-pena-paper-input: {
+                background-color: #fff;
+            }
+            --victor-pena-paper-button: {
+                --paper-button: {
+                    background: #8b0000;
+                    color: #000;
+                }
+            }
+        }
+        
+      
+        
+        victor-pena {
+            --victor-pena: {
+                background-color: #c0c0c0;
+                color: #fff;
+                margin: 10px;
+                padding: 20px;
+            }
+        }
     </style>
     <h2>Hello [[prop1]]!</h2>
-
-    <div class="container">
-      <victor-pena id="elemento1" title="Valor de propiedad inLine" input-value="Input value inLine" button-value="button value inLine"></victor-pena>
-      <victor-pena id="elemento2" title="[[title2]]" input-value="{{input2}}" button-value="[[input2]]"></victor-pena>
-      <victor-pena id="elemento3" title="{{workshopValue}}" input-value="{{workshopValue}}" button-value="{{workshopValue}}"></victor-pena>
+    <div hidden$="{{authenticated}}">
+        <login-workshop on-click-changed="_onLoginSuccess"></login-workshop>
     </div>
 
-  </template>
+    <div class="container" hidden$="{{!authenticated}}">
+        <victor-pena id="elemento1" title="Valor de propiedad inLine" input-value="Input value inLine" button-value="button value inLine"></victor-pena>
+        <victor-pena id="elemento2" title="[[title2]]" input-value="{{input2}}" button-value="[[input2]]"></victor-pena>
+        <victor-pena id="elemento3" title="{{workshopValue}}" input-value="{{workshopValue}}" button-value="{{workshopValue}}"></victor-pena>
+
+    </div>
+
+    </template>
 
     <script>
         /**
@@ -105,9 +112,15 @@
                     workshopValue: {
                         type: String,
                         value: 'workshop'
+                    },
+                    authenticated: {
+                        type: Boolean,
+                        value: false,
                     }
-
                 };
+            }
+            _onLoginSuccess() {
+                this.set('authenticated', true);
             }
         }
 
