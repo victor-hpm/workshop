@@ -62,7 +62,11 @@
             }
         }
         
-      
+        .pokeCard {
+        display: flex;
+        flex-wrap: wrap;
+        width: 200px;
+      }
         
         victor-pena {
             --victor-pena: {
@@ -86,20 +90,22 @@
     </div>
 
     <iron-ajax
-        id="ajax"
         auto
         url="https://pokeapi.co/api/v2/pokemon?limit=50" 
         handle-as="json"
         on-response="handleResponse"
         >
     </iron-ajax>
-    <template is="dom-repeat" items="{{allPokemons}}">
-        <paper-card heading="{{item.name}}">
+
+    <div class="pokeCard">
+    <template id="pokemons" is="dom-repeat" items="{{pokedex}}">
+        <paper-card heading="{{item.name}}" image="{{item.image}}">
             <div class="card-content">
-                <p>{{item.name}}</p>
+                <p>Pokemon ID: {{item.index}}</p>
             </div>
         </paper-card>
     </template>
+    </div>
 
     </template>
 
@@ -134,11 +140,7 @@
                         type: Boolean,
                         value: false,
                     },
-                    allPokemons: {
-                        type: Array,
-                        value: []
-                    },
-                    infoPokemon: {
+                    response: {
                         type: Array,
                         value: []
                     },
@@ -153,29 +155,23 @@
             }
 
             handleResponse(e) {
-                console.log(e.detail.response)
-                this.allPokemons = e.detail.response.results
-                console.log('allPokemons', this.allPokemons);
-
-                this.allPokemons.forEach(pokemon => {
-                    this.dataPokemon(pokemon);
+                console.log(e.detail.response);
+                this.response = e.detail.response.results; // 1.- gestionar la llamada al servicio que trae 50 elementos
+                console.log('response', this.response);
+                this.response.forEach((pokemon, id) => {
+                    const pokedex = `(https://pokeapi.co/api/v2/pokemon/${id+1})`;
+                    this.pokedex.push({
+                        name: pokemon.name,
+                        index: id + 1,
+                        image: `https://pokeres.bastionbot.org/images/pokemon/${id+1}.png`
+                    });
                 });
+                this.$.pokemons.render();
+                console.log('pokedex', this.pokedex);
             }
-
-            dataPokemon(pokemon) {
-                let url = pokemon.url
-                fetch(url)
-                    .then(response => response.json())
-                    .then(infoPokemon => {
-                        console.log('infoPokemon', this.infoPokemon);
-                    })
-            }
-
-
-
-
-            //   `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
         }
+
+
 
         window.customElements.define(WorkshopApp.is, WorkshopApp);
     </script>
